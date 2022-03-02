@@ -1,0 +1,9 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requierements/nginx
+    restart: always
+#    volumes:
+#      - db_data:/var/www/html
