@@ -4,6 +4,9 @@ services:
     container_name: nginx
     build:
       context: ./requierements/nginx
+    image: nginx:ivloisy
+    ports:
+      - 8080:8080
     restart: always
 #    volumes:
 #      - db_data:/var/www/html
