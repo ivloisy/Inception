@@ -5,7 +5,7 @@ server {
 	server_name ivloisy.42.fr;
 
 	root /var/www/html;
-	index index.html;
+	index index.php index.html;
 
 	ssl on;
 	ssl_certificate /etc/nginx/ssl/ivloisy.42.fr.crt;
@@ -15,5 +15,16 @@ server {
 
 	location / {
 		try_files $uri $uri/ =404;
+	}
+
+	location ~ \.php$ {
+		try_files $uri =404;
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass wordpress:9000;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_param PATH_INFO $fastcgi_path_info;
+		internal;
 	}
 }

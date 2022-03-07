@@ -1,12 +1,30 @@
 version: '3'
+
+networks:
+  inception:
+
 services:
   nginx:
     container_name: nginx
     build:
       context: ./requierements/nginx
     image: nginx:ivloisy
+    networks:
+      - inception
+    depends_on :
+      - wordpress
     ports:
       - 443:443
     restart: always
 #    volumes:
 #      - db_data:/var/www/html
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requierements/wordpress
+    image: wordpress:ivloisy
+    networks:
+      - inception
+    ports:
+      - 9000:9000
+    restart: always
