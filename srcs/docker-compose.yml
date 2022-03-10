@@ -6,9 +6,13 @@ networks:
 services:
   nginx:
     container_name: nginx
+    env_file:
+      - ./.env
     build:
       context: ./requierements/nginx
     image: nginx:ivloisy
+    volumes:
+      - wp_volume:/var/www/html/wordpress
     networks:
       - inception
     depends_on :
@@ -16,15 +20,47 @@ services:
     ports:
       - 443:443
     restart: always
-#    volumes:
-#      - db_data:/var/www/html
+
   wordpress:
     container_name: wordpress
+    env_file:
+      - ./.env
     build:
       context: ./requierements/wordpress
     image: wordpress:ivloisy
+    volumes:
+      - wp_volume:/var/www/html/wordpress
     networks:
       - inception
     ports:
       - 9000:9000
+    restart: unless-stopped
+
+  mariadb:
+    container_name: mariadb
+    env_file:
+      - ./.env
+    build:
+      context: ./requierements/mariadb
+    image: mariadb:ivloisy
+    volumes:
+      - db_volume:/var/lib/mysql
+    networks:
+      - inception
+    ports:
+      - 3306:3306
     restart: always
+
+volumes:
+  wp_volume:
+   driver: local
+   driver_opts:
+    o: bind
+    type: volume
+    device: /home/ivloisy/data/wordpress
+  db_volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: volume
+      device: /home/ivloisy/data/mariadb
