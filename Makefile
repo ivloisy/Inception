@@ -6,14 +6,14 @@
 #    By: ivloisy <ivloisy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/04 14:57:46 by ivloisy           #+#    #+#              #
-#    Updated: 2022/03/18 14:57:08 by ivloisy          ###   ########.fr        #
+#    Updated: 2022/03/18 18:53:15 by ivloisy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DATA=/home/ivloisy/data
 YML=./srcs/docker-compose.yml
 
-all: vol #up
+all: vol up
 
 vol: del
 	mkdir -p $(DATA)/wordpress
@@ -34,6 +34,6 @@ down:
 clean: down
 	docker system prune
 
-re: clean up
+re: down all
 
 .PHONY: all up down clean
