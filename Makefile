@@ -6,7 +6,7 @@
 #    By: ivloisy <ivloisy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/04 14:57:46 by ivloisy           #+#    #+#              #
-#    Updated: 2022/03/18 13:51:29 by ivloisy          ###   ########.fr        #
+#    Updated: 2022/03/18 14:57:08 by ivloisy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ all: vol #up
 vol: del
 	mkdir -p $(DATA)/wordpress
 	mkdir -p $(DATA)/mariadb
-	sudo chown -R ivloisy $(HOME)/data
-	sudo chmod -R 755 $(HOME)/data
+	sudo chown -R ivloisy $(DATA)
+	sudo chmod -R 755 $(DATA)
 
 del:
-	rm -rf $(HOME)/wordpress
-	rm -rf $(HOME)/mariadb
+	sudo rm -rf $(DATA)/wordpress
+	sudo rm -rf $(DATA)/mariadb
 
 up:
 	docker-compose -f $(YML) up -d --build

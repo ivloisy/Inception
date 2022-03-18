@@ -4,11 +4,12 @@ if [ -f ./wordpress/wp-config.php ]
 then
 	echo "Wordpress already downloaded"
 else
-	echo "//////////////////coucou/////////"
+	#echo "//////////////////coucou/////////"
 	#Download wordpress
-	# wget https://wordpress.org/latest.tar.gz
-	# tar -xzvf latest.tar.gz
-	# rm -rf latest.tar.gz
+	#wget https://wordpress.org/latest.tar.gz
+	wget https://wordpress.org/latest.tar.gz
+	tar -xzvf latest.tar.gz
+	rm -rf latest.tar.gz
 
 	#Update configuration file
 	# rm -rf /etc/php/7.3/fpm/pool.d/www.conf
