@@ -51,7 +51,7 @@ services:
       - inception
     ports:
       - 3306:3306
-    restart: always
+    restart: on-failure
 
 volumes:
   wp_volume:

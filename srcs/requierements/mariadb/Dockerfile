@@ -6,7 +6,8 @@ RUN apt-get update -yq \
 
 RUN mkdir -p /var/run/mysqld \
 && chown -R mysql:mysql /var/run/mysqld \
-&& chmod 777 /var/run/mysqld
+&& chmod 777 /var/run/mysqld \
+&& chmod 777 /var/lib/mysql
 
 EXPOSE 3306
 
@@ -16,5 +17,5 @@ ENTRYPOINT ["entrypoint.sh"]
 
 #Command to launch mariadb and enable the database to listen globally
 
-CMD ["mysqld", "--bind-address=0.0.0.0"]
+#CMD ["mysqld", "--bind-address=0.0.0.0"]
 #CMD tail -f
