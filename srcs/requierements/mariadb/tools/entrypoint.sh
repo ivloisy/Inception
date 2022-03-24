@@ -43,4 +43,7 @@
 # exec "$@"
 
 mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+mysqld --init-file="/tmp/script/init.sql"
+
 /usr/bin/mysqld_safe --user=mysql --datadir='/var/lib/mysql'

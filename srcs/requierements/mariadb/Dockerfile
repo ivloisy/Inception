@@ -6,14 +6,25 @@ RUN apt-get update -yq \
 
 RUN mkdir -p /var/run/mysqld \
 && chown -R mysql:mysql /var/run/mysqld \
-&& chmod 777 /var/run/mysqld \
-&& chmod 777 /var/lib/mysql
+&& chown -R mysql:mysql /var/lib/mysql
+#  \
+# && chmod 777 /var/run/mysqld \
+# && chmod 777 /var/lib/mysql
 
+RUN     rm -rf /etc/mysql/my.cnf
+
+COPY ./tools/entrypoint.sh /tmp/script/
+COPY ./conf/init.sql /tmp/script/
+COPY ./conf/my.cnf /etc/mysql/
+#COPY ./conf/wordpress.sql /usr/local/bin/
 EXPOSE 3306
 
-COPY ./tools/entrypoint.sh /usr/local/bin/
-#COPY ./conf/wordpress.sql /usr/local/bin/
-ENTRYPOINT ["entrypoint.sh"]
+RUN chown -R mysql:mysql /tmp/script
+RUN chown -R mysql:mysql /etc/mysql
+
+USER mysql
+
+ENTRYPOINT ["sh", "/tmp/script/entrypoint.sh"]
 
 #Command to launch mariadb and enable the database to listen globally
 
