@@ -1,27 +1,33 @@
 #!/bin/sh
 
-if [ -f ./wordpress/wp-config.php ]
+if [ -f /var/www/html/wordpress/wp-config.php ]
+
 then
-	echo "Wordpress already downloaded"
+	echo "Wordpress already installed"
+
 else
 	#echo "//////////////////coucou/////////"
 	#Download wordpress
 	#wget https://wordpress.org/latest.tar.gz
-	wget https://wordpress.org/latest.tar.gz
-	tar -xzvf latest.tar.gz
-	rm -rf latest.tar.gz
+	# wget https://wordpress.org/latest.tar.gz
+	# tar -xzvf latest.tar.gz
+	# rm -rf latest.tar.gz
+	# mv /tmp/wp-config.php ./wordpress
+	# chmod 644 /var/www/html/wordpress/wp-config.php
 
-	#Update configuration file
-	# rm -rf /etc/php/7.3/fpm/pool.d/www.conf
-	# mv ./www.conf /etc/php/7.3/fpm/pool.d/
 
-	#Inport env variables in the config file
-	# cd /var/www/html/wordpress
-	# sed -i "s/username_here/$MYSQL_USER/g" wp-config-sample.php
-	# sed -i "s/password_here/$MYSQL_PASSWORD/g" wp-config-sample.php
-	# sed -i "s/localhost/$MYSQL_HOSTNAME/g" wp-config-sample.php
-	# sed -i "s/database_name_here/$MYSQL_DATABASE/g" wp-config-sample.php
-	# mv wp-config-sample.php wp-config.php
+
+	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	chmod +x wp-cli.phar
+	mv wp-cli.phar /usr/local/bin/wp
+	cd /var/www/html/wordpress
+	wp core download --allow-root
+	wp core config --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb --skip-check --extra-php --allow-root <<PHP
+define( 'WP_DEBUG', true );
+PHP
+	sleep 10
+	wp core install --url=$WP_URL --title=$WP_TITLE --admin_user=$MYSQL_USER --admin_email=$WP_MAIL --admin_password=$WP_PASSWORD --allow-root --path=/var/www/html/wordpress/
+
 fi
 
 exec "$@"

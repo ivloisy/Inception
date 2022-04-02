@@ -6,7 +6,7 @@
 #    By: ivloisy <ivloisy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/04 14:57:46 by ivloisy           #+#    #+#              #
-#    Updated: 2022/03/18 18:53:15 by ivloisy          ###   ########.fr        #
+#    Updated: 2022/04/02 01:47:06 by ivloisy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,13 @@ down:
 	docker-compose -f $(YML) down
 
 clean: down
-	docker system prune
+	docker system prune -f
 
-re: down all
+fclean: clean
+	docker system prune -af
+	docker volume rm srcs_db_volume
+	docker volume rm srcs_wp_volume
+
+re: clean all
 
 .PHONY: all up down clean
