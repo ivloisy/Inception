@@ -14,8 +14,6 @@ RUN mkdir -p /run/php && mkdir -p /var/log/php7.3-fpm
 
 ENTRYPOINT ["entrypoint.sh"]
 
-#WORKDIR /var/www/html/
-
 EXPOSE 9000
 
 CMD /usr/sbin/php-fpm7.3 -F

@@ -6,17 +6,6 @@ then
 	echo "Wordpress already installed"
 
 else
-	#echo "//////////////////coucou/////////"
-	#Download wordpress
-	#wget https://wordpress.org/latest.tar.gz
-	# wget https://wordpress.org/latest.tar.gz
-	# tar -xzvf latest.tar.gz
-	# rm -rf latest.tar.gz
-	# mv /tmp/wp-config.php ./wordpress
-	# chmod 644 /var/www/html/wordpress/wp-config.php
-
-
-
 	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
