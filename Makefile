@@ -6,7 +6,7 @@
 #    By: ivloisy <ivloisy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/04 14:57:46 by ivloisy           #+#    #+#              #
-#    Updated: 2022/04/02 01:47:06 by ivloisy          ###   ########.fr        #
+#    Updated: 2022/04/05 12:50:26 by ivloisy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,4 +41,4 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all up down clean
+.PHONY: all up down clean fclean re

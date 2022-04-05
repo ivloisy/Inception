@@ -55,11 +55,11 @@ services:
 
 volumes:
   wp_volume:
-   driver: local
-   driver_opts:
-    o: bind
-    type: volume
-    device: /home/ivloisy/data/wordpress
+    driver: local
+    driver_opts:
+      o: bind
+      type: volume
+      device: /home/ivloisy/data/wordpress
   db_volume:
     driver: local
     driver_opts:
