@@ -6,32 +6,30 @@
 #    By: ivloisy <ivloisy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/04 14:57:46 by ivloisy           #+#    #+#              #
-#    Updated: 2022/04/05 12:50:26 by ivloisy          ###   ########.fr        #
+#    Updated: 2022/04/05 18:02:22 by ivloisy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DATA=/home/ivloisy/data
+DATA=$(HOME)/data
 YML=./srcs/docker-compose.yml
 
-all: vol up
+all: up
 
-vol: del
+vol:
+	mkdir -p $(DATA)
 	mkdir -p $(DATA)/wordpress
 	mkdir -p $(DATA)/mariadb
-	sudo chown -R ivloisy $(DATA)
-	sudo chmod -R 755 $(DATA)
 
 del:
-	sudo rm -rf $(DATA)/wordpress
-	sudo rm -rf $(DATA)/mariadb
+	sudo rm -r $(DATA)
 
-up:
+up: vol
 	docker-compose -f $(YML) up -d --build
 
 down:
 	docker-compose -f $(YML) down
 
-clean: down
+clean: down del
 	docker system prune -f
 
 fclean: clean
@@ -39,6 +37,6 @@ fclean: clean
 	docker volume rm srcs_db_volume
 	docker volume rm srcs_wp_volume
 
-re: clean all
+re: fclean all
 
 .PHONY: all up down clean fclean re

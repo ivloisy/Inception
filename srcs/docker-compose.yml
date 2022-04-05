@@ -9,7 +9,7 @@ services:
     env_file:
       - ./.env
     build:
-      context: ./requierements/nginx
+      context: ./requirements/nginx
     image: nginx:ivloisy
     volumes:
       - wp_volume:/var/www/html/wordpress
@@ -26,7 +26,7 @@ services:
     env_file:
       - ./.env
     build:
-      context: ./requierements/wordpress
+      context: ./requirements/wordpress
     image: wordpress:ivloisy
     volumes:
       - wp_volume:/var/www/html/wordpress
@@ -36,14 +36,14 @@ services:
       - mariadb
     ports:
       - 9000:9000
-    restart: on-failure
+    restart: always
 
   mariadb:
     container_name: mariadb
     env_file:
       - ./.env
     build:
-      context: ./requierements/mariadb
+      context: ./requirements/mariadb
     image: mariadb:ivloisy
     volumes:
       - db_volume:/var/lib/mysql
@@ -51,7 +51,7 @@ services:
       - inception
     ports:
       - 3306:3306
-    restart: on-failure
+    restart: always
 
 volumes:
   wp_volume:

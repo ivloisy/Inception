@@ -8,7 +8,7 @@ then
 
 else
     mysql_install_db
-    mysqld --init-file="/tmp/init.sql"
+    mysqld --init-file="/tmp/wordpress.sql"
 
 fi
 

@@ -11,7 +11,7 @@ RUN mkdir -p /var/run/mysqld \
 RUN     rm -rf /etc/mysql/my.cnf
 
 COPY ./tools/entrypoint.sh /tmp
-COPY ./tools/init.sql /tmp
+COPY ./tools/wordpress.sql /tmp
 COPY ./conf/my.cnf /etc/mysql
 
 EXPOSE 3306
